@@ -1,11 +1,11 @@
 function [decodedPackets, incorrectlyReceivedPacketsAmount] = decodeDataCodedWithParityBits(data)
     incorrectlyReceivedPacketsAmount = 0;
-    [packetAmount, packetSize] = size(data);
+    [packetSize, packetAmount] = size(data);
     packetSize = packetSize - 1;
     decodedPackets = data;
     for i = 1 : packetAmount
-        decodedPackets(i, packetSize + 2) = mod(sum(data(i, 1:packetSize)), 2);
-        if decodedPackets(i, packetSize + 1) ~= decodedPackets(i, packetSize + 2)
+        decodedPackets(packetSize + 2,i) = mod(sum(data(1:packetSize, i)), 2);
+        if decodedPackets(packetSize + 1, i) ~= decodedPackets(packetSize + 2 , i)
             incorrectlyReceivedPacketsAmount = incorrectlyReceivedPacketsAmount + 1;
         end
     end
