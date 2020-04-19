@@ -1,27 +1,13 @@
 clear; 
-
-%x = generatePackets(2, 4);
-%y = codeWithParityBits(x);
-%disp(y);
-%z = sendDataThroughBSC(y, 0.01);
-%disp(z);
-%[a, b] = decodeDataCodedWithParityBits(z);
-%display(a);
-%display(b);
-
-
-x = generatePackets(2,20);
-disp('msg: ');
-disp(x);
-%y = codeWithCRC32(x);
-%disp(y);
-z = sendDataThroughGilbert(x, 0,1);
-%disp(z);
-%crcDetector = comm.CRCDetector('Polynomial','z^32+z^26+z^23+z^22+z^16+z^12+z^11+z^10+z^8+z^7+z^5+z^4+z^2+z+1');
-%[msg,err] = crcDetector(z);
-%display(msg);
-%display(err);
-disp(z);
-
-
-
+% pokaz mozliwosci symulatora na dzien 19.04.2020
+data = generatePackets(30, 100);
+dataCodedWithParityBits = codeWithParityBits(data);
+dataCodedWithCRC32 = codeWithCRC32(data);
+dataParityBSC = sendDataThroughBSC(dataCodedWithParityBits, 0.001);
+dataCRC32Gilbert = sendDataThroughGilbert(dataCodedWithCRC32, 0.001, 0.8);
+[decodedParity, errParity] = decodeDataCodedWithParityBits(dataParityBSC);
+[decodedCRC32, errCRC32] = decodeDataCodedWithCRC32(dataCRC32Gilbert);
+disp('Ilosc bledow przy przesylaniu przez BSC (bit parzystosci):');
+disp(errParity);
+disp('Ilosc bledow przy przesylaniu przez Gilberta (CRC32):');
+disp(errCRC32);
