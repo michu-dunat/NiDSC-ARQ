@@ -13,7 +13,13 @@ sentData = zeros(packetSize, packetAmount);
     for i = 1 : packetAmount % przechodzenie po kolumnach
         for j = 1 : packetSize % przechodzenie po wierszach
             currentState = flipState(currentState, goodToBad, badToGood); % wywloanie funkcji okreslenia obecnego stanu
-            sentData(j,i) = xor(currentState, data(j,i)); % przesylanie bitow w zaleznosci od obenego stanu
+            if currentState == 0
+                % przesylanie poprawnych bitow w stanie dobrym z prawdopodobienstwem (1-goodToBad)
+                sentData(j,i) = xor(data(j,i), (rand(1) < goodToBad)); 
+            elseif currentState == 1
+                % przesylanie niepoprawnych bitow w stanie zlym z prawdopodobienstwem badToGood
+                sentData(j,i) = xor(data(j,i), (rand(1) < badToGood)); 
+            end   
         end
     end
 end
