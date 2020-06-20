@@ -3,8 +3,8 @@ symulacja przeslania danych przez kanal o modelu Gilberta-Eliota
 kanal moze znajdowac sie w dwoch stanach - dobrym i zlym, 
 kanal opisuja dwa prawdopobienstwa - przejscia z dobrego stanu do zlego 
 (bardzo male prawdopodbienstwo) i ze zlego do dobrego (bardzo duze prawdopodbienstwo)
-jezeli kanal znajduje sie w stanie dobrym to przesylane sa te same bity
-jezeli kanal znajduje sie w stanie zlym to przesylane sa bity przeciwne
+Jezeli kanal znajduje sie w stanie DOBRYM to przesylane sa poprawne bity z prawdopodobienstwem: "1 - goodToBad"
+jezeli kanal znajduje sie w stanie ZLYM to przesylane sa niepoprawne bity z prawdopodobienstwem: "badToGood".
 %}
 function sentData = sendDataThroughGilbert(data, goodToBad, badToGood)
 [packetSize, packetAmount] = size(data); % pobranie rozmiaru tablicy

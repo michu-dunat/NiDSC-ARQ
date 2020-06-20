@@ -11,7 +11,7 @@ Dane można zakodować przy pomocy następujących kodów detekcyjnych:
 Bit parzystości został samodzielnie zaimplementowany (0 oznacza parzystą ilość jedynek, 1 oznacza nieparzystą ilość jedynek). 
 
 Do implementacji CRC-32 użyto biblioteki ``` Communication Toolbox ```, a dokładniej funkcji ``` comm.CRCGenerator() ``` i ``` comm.CRCDetector() ```.
-### Kanały transimsyjne
+### Kanały transmisyjne
 Dane można wysłać następującymi kanałami transmisyjnymi:
 - Binary Symmetric Channel (BSC).
 - Model Gilberta.
@@ -19,10 +19,10 @@ Dane można wysłać następującymi kanałami transmisyjnymi:
 BSC został zaimplementowany z wykorzystaniem biblioteki ``` Communication Toolbox ```, a dokładniej użyto funkcji ``` bsc() ```.
 
 Kanał Gilberta zaimplementowano samodzielnie. Kanał może znajdować się w dwóch stanach - dobrym i złym. 
-Opisują go dwa prawdopobieństwa - przejścia z dobrego stanu do złego (bardzo małe prawdopodbieństwo) 
-i vice versa (bardzo duże prawdopodbieństwo).
-Jeżeli kanał znajduje się w stanie dobrym to przesyłane są poprawne bity z prawdopodobieństwem ``` 1 - pierwsze prawdopodbieństwo ```, 
-a jeżeli kanał znajduje się w stanie złym to przesyłane sa niepoprawne bity z prawdopodobieństwem drugim.
+Opisują go dwa prawdopodobieństwa - przejścia z dobrego stanu do złego (bardzo małe prawdopodobieństwo) 
+i vice versa (bardzo duże prawdopodobieństwo).
+Jeżeli kanał znajduje się w stanie dobrym to przesyłane są poprawne bity z prawdopodobieństwem ``` 1 - pierwsze prawdopodobieństwo ```, 
+a jeżeli kanał znajduje się w stanie złym to przesyłane są niepoprawne bity z prawdopodobieństwem drugim.
 ### Protokół ARQ
 Użyto najprostszego protokołu ARQ - Stop-and-wait. Pakiety wysyłane są pojedynczo; jeżeli wykryto błąd następuje retransmisja do skutku.
 ## Przygotowanie do uruchomienia
@@ -41,7 +41,7 @@ goodToBadProbability = 0.02;
 badToGoodProbability = 0.8;
 codingType = 'PB';  % 'CRC32' or 'PB'
 channel = 'GILBERT'; % 'BSC' or 'GILBERT'
-iloscObiegow = 100;
+loopRepetitions = 100;
 ```
 Domyślnie wyświetlanymi wynikami są BER jaką "widzi" użytkownik i całkowita nadmiarowość transmisji:
 ```

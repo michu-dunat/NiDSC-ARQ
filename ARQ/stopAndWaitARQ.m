@@ -1,4 +1,4 @@
-function [errorAmount, n, allBitsSent, redundantBitsFromCoding, redundantBitsFromRetransmission, result] = stopAndWaitARQ(packetAmount, packetSize, errorProbability, goodToBadProbability, badToGoodProbability,codingType, channel)
+function [errorAmount, n, allBitsSent, redundantBitsFromCoding, redundantBitsFromRetransmission, result] = stopAndWaitARQ(packetAmount, packetSize, errorProbability, goodToBadProbability, badToGoodProbability, codingType, channel)
 
     data = generatePackets(packetSize, packetAmount);
     result = zeros(packetSize, packetAmount);

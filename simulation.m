@@ -1,6 +1,6 @@
 clear; 
 clc;
-% pokaz mozliwosci symulatora na dzien 22.05.2020
+% pokaz mozliwosci symulatora na dzien 20.06.2020
 
 % parametry pomiaru
 packetAmount = 20;
@@ -10,7 +10,7 @@ goodToBadProbability = 0.02;
 badToGoodProbability = 0.8;
 codingType = 'PB';  % 'CRC32' or 'PB'
 channel = 'GILBERT'; % 'BSC' or 'GILBERT'
-iloscObiegow = 100;
+loopRepetitions = 100;
 
 % inicjalizacja zmiennych do usrednionych wynikow
 errorAmountAvg = 0;
@@ -19,22 +19,22 @@ allBitsSentAvg = 0;
 redundantBitsFromCodingAvg = 0;
 redundantBitsFromRetransmissionAvg = 0;
 
-for j = 1 : iloscObiegow
+for j = 1 : loopRepetitions
     [errorAmount, n, allBitsSent, redundantBitsFromCoding, redundantBitsFromRetransmission, result] = stopAndWaitARQ(packetAmount, packetSize, errorProbability, goodToBadProbability, badToGoodProbability,codingType, channel);
     errorAmountAvg = errorAmountAvg + errorAmount;
     nAvg = nAvg + n;
     allBitsSentAvg = allBitsSentAvg + allBitsSent;
     redundantBitsFromCodingAvg = redundantBitsFromCodingAvg + redundantBitsFromCoding;
     redundantBitsFromRetransmissionAvg = redundantBitsFromRetransmissionAvg + redundantBitsFromRetransmission;
-    disp([num2str(j * 100 / iloscObiegow), '%']);
+    disp([num2str(j * 100 / loopRepetitions), '%']);
 end
 
 % obliczanie srednich
-errorAmountAvg = errorAmountAvg / iloscObiegow;
-nAvg = nAvg / iloscObiegow;
-allBitsSentAvg = allBitsSentAvg / iloscObiegow;
-redundantBitsFromCodingAvg = redundantBitsFromCodingAvg / iloscObiegow;
-redundantBitsFromRetransmissionAvg = redundantBitsFromRetransmissionAvg / iloscObiegow;
+errorAmountAvg = errorAmountAvg / loopRepetitions;
+nAvg = nAvg / loopRepetitions;
+allBitsSentAvg = allBitsSentAvg / loopRepetitions;
+redundantBitsFromCodingAvg = redundantBitsFromCodingAvg / loopRepetitions;
+redundantBitsFromRetransmissionAvg = redundantBitsFromRetransmissionAvg / loopRepetitions;
 
 % wyswietlenie wynikow
 %{
